@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Structures - Combined</title>
+  <link rel="stylesheet" href="datastructure.css" />
+  <script src="https://kit.fontawesome.com/26e13cefd0.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Animated bg layers from datastructure pages -->
+  <div class="div1"></div>
+  <div class="div2"></div>
+  <div class="div3"></div>
+  <div class="div4"></div>
+  <div class="div5"></div>
+
+  <!-- Navbar simplified -->
+  <nav class="navbar">
+    <div class="navbar__container" style="display: flex; justify-content: space-between; align-items: center;">
+      <ul class="navbar__menu" style="display: flex; align-items: center;">
+        <li class="navbar__btn"><a href="../../../index.html#courses-section" class="button">Back</a></li>
+      </ul>
+      <div id="navbar-right-actions" class="navbar__right" style="display: flex; align-items: center; gap: 10px; margin-right: 18px;">
+        <button id="mode-toggle" class="mode-toggle" aria-label="Toggle light/dark mode" style="font-size: 1.3rem; background: none; border: none; cursor: pointer;">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+        <!-- Profile icon will be injected here when logged in -->
+      </div>
+    </div>
+  </nav>
+
+  <div class="split-root" id="split-root">
+    <!-- Left topics -->
+    <aside class="topics" id="topics" aria-label="Topics">
+      <ul class="topic-list" id="topicList">
+        <li><a href="#intro" class="topic-item" data-file="data1.html" aria-current="true">Introduction</a></li>
+        <li><a href="#linear" class="topic-item" data-file="data2.html">Linear Data Structures</a></li>
+        <li><a href="#tree" class="topic-item" data-file="data3.html">Tree Data Structures</a></li>
+        <li><a href="#hash" class="topic-item" data-file="data4.html">Hash Data Structures</a></li>
+        <li><a href="#graph" class="topic-item" data-file="data5.html">Graph Data Structures</a></li>
+      </ul>
+    </aside>
+
+    <!-- Draggable divider -->
+    <div class="divider" id="divider" role="separator" aria-orientation="vertical" aria-label="Resize"></div>
+
+    <!-- Right content -->
+    <main class="content" id="content" tabindex="-1">
+      <div class="content-inner" id="contentInner">
+        <h1>Loading…</h1>
+      </div>
+    </main>
+  </div>
+
+  <script src="data_structure.js"></script>
+  <script src="../../../shared/auth.js"></script>
+  <script>
+    // Theme toggle: persist color scheme and swap icon
+    (function(){
+      function getColorScheme(){
+        try {
+          if (window.Theme && typeof Theme.getColorScheme === 'function') return Theme.getColorScheme();
+          return localStorage.getItem('site_colorScheme') || 'dark';
+        } catch(_) { return 'dark'; }
+      }
+      function setColorScheme(mode){
+        try {
+          if (window.Theme && typeof Theme.setColorScheme === 'function') Theme.setColorScheme(mode);
+          else {
+            localStorage.setItem('site_colorScheme', mode);
+            document.documentElement.setAttribute('data-color-scheme', mode);
+          }
+        } catch(_) {}
+      }
+      function applyIcon(mode){
+        var btn = document.getElementById('mode-toggle');
+        if (!btn) return;
+        var icon = btn.querySelector('i');
+        if (!icon) return;
+        if (mode === 'light') {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+          btn.setAttribute('aria-label', 'Switch to dark mode');
+        } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+          btn.setAttribute('aria-label', 'Switch to light mode');
+        }
+      }
+      document.addEventListener('DOMContentLoaded', function(){
+        var mode = getColorScheme();
+        // Apply to attribute if Theme API not doing it
+        if (!(window.Theme && typeof Theme.applyColorScheme === 'function')) {
+          document.documentElement.setAttribute('data-color-scheme', mode);
+        }
+        applyIcon(mode);
+        var btn = document.getElementById('mode-toggle');
+        if (btn) {
+          btn.addEventListener('click', function(){
+            var curr = getColorScheme();
+            var next = curr === 'light' ? 'dark' : 'light';
+            setColorScheme(next);
+            applyIcon(next);
+          });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
