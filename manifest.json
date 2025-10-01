@@ -1,0 +1,21 @@
+{
+  "name": "NICETRY",
+  "short_name": "NICETRY",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#22223b",
+  "description": "Learn Data Structures and Algorithms",
+  "icons": [
+    {
+      "src": "images/Icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/Icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
